@@ -2522,3 +2522,41 @@ html.motion .image-reveal.image-visible .social-device-scene{
   .service-editorial-row.service-scroll-in{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
   .service-editorial-row.service-scroll-in .service-tech-chip{animation:none!important}
 }
+
+
+/* ===== Visibility safety + complete technology stacks ===== */
+/* Content stays visible by default; JS only adds enhancement. */
+.hero h1,.hero .lead,.hero .actions,
+.page-hero h1,.page-hero .lead,.page-hero .actions,
+.service-detail-hero h1,.service-detail-hero .lead,.service-detail-hero .actions{
+  opacity:1;
+  visibility:visible;
+}
+html.motion body:not(.site-ready) .hero h1,
+html.motion body:not(.site-ready) .page-hero h1,
+html.motion body:not(.site-ready) .service-detail-hero h1{
+  opacity:.92;
+  transform:translateY(12px);
+  filter:none;
+}
+html.motion body:not(.site-ready) .hero .lead,
+html.motion body:not(.site-ready) .page-hero .lead,
+html.motion body:not(.site-ready) .service-detail-hero .lead,
+html.motion body:not(.site-ready) .hero .actions,
+html.motion body:not(.site-ready) .page-hero .actions,
+html.motion body:not(.site-ready) .service-detail-hero .actions{
+  opacity:.92;
+  transform:translateY(8px);
+}
+.service-tech-stack{
+  display:grid!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+.service-tech-list{display:flex!important}
+.service-tech-chip{display:inline-flex!important}
+.service-tech-chip i{
+  overflow:hidden;
+  white-space:nowrap;
+  line-height:1;
+}
