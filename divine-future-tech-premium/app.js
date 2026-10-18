@@ -20,8 +20,29 @@
   const nav = document.querySelector(".nav");
   const menu = document.querySelector(".menu");
   if (menu && nav) {
-    menu.addEventListener("click", () => nav.classList.toggle("open"));
-    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+    const setMenu = open => {
+      nav.classList.toggle("open", open);
+      menu.setAttribute("aria-expanded", String(open));
+      menu.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      menu.textContent = open ? "×" : "☰";
+      document.body.classList.toggle("nav-open", open && innerWidth <= 1040);
+    };
+    setMenu(false);
+    menu.addEventListener("click", e => {
+      e.stopPropagation();
+      setMenu(!nav.classList.contains("open"));
+    });
+    nav.addEventListener("click", e => e.stopPropagation());
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+    document.addEventListener("click", () => {
+      if (innerWidth <= 1040 && nav.classList.contains("open")) setMenu(false);
+    });
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") setMenu(false);
+    });
+    addEventListener("resize", () => {
+      if (innerWidth > 1040) setMenu(false);
+    }, { passive:true });
   }
 
   const reveals = [...document.querySelectorAll(".reveal")];
