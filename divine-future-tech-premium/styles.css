@@ -1318,3 +1318,17 @@ html.motion .service-detail-page .faq details:not(.visible){
   .service-image-icon{width:44px;height:44px}
   .service-image-icon svg{width:21px;height:21px}
 }
+
+/* ===== Deep service scope + work details ===== */
+.service-row-scope{display:grid;gap:7px;margin-top:17px;padding:13px 14px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--surface-2) 84%,transparent)}
+.service-row-scope span{color:var(--muted);font-size:.78rem;line-height:1.48}.service-row-scope b{color:var(--text);font-weight:800}
+.service-scope-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.service-scope-card{position:relative;padding:25px;border:1px solid var(--line);border-radius:24px;background:var(--surface);box-shadow:0 14px 42px rgba(0,0,0,.08);overflow:hidden;transform-style:preserve-3d;--hx:50%;--hy:50%}
+.service-scope-card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(300px circle at var(--hx) var(--hy),rgba(157,220,255,.14),rgba(102,152,255,.055) 45%,transparent 72%);transition:opacity .25s}
+.service-scope-card:hover::after{opacity:1}.service-scope-card>*{position:relative;z-index:1}.service-scope-card:hover{border-color:rgba(157,220,255,.28);box-shadow:0 28px 74px rgba(0,0,0,.2)}
+.scope-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;margin-bottom:18px;color:var(--ice);background:linear-gradient(135deg,rgba(102,152,255,.20),rgba(139,108,255,.16));border:1px solid rgba(157,220,255,.18)}
+.scope-list{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:10px}.scope-list li{position:relative;padding-left:22px;color:var(--muted);font-size:.88rem;line-height:1.55}
+.scope-list li::before{content:"";position:absolute;left:2px;top:.68em;width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--ice),var(--accent));box-shadow:0 0 14px rgba(102,152,255,.28)}
+.service-deep-scope .section-head{margin-bottom:28px}
+@media(max-width:980px){.service-scope-grid{grid-template-columns:1fr}}
+@media(max-width:720px){.service-row-scope{padding:11px 12px}.service-row-scope span{font-size:.75rem}.service-scope-card{padding:21px}.scope-list li{font-size:.86rem}}
