@@ -2610,48 +2610,13 @@ html.motion body:not(.site-ready) .service-detail-hero .actions{
   display:grid!important;
 }
 
-/* ===== Uploaded Divine Future Tech logo ===== */
-.brand-image-link{
-  display:inline-flex!important;
-  align-items:center;
-  flex:0 0 auto;
-  color:inherit;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-.brand-logo-new{
-  display:block;
-  width:246px;
-  height:68px;
-  border-radius:0;
-  background-color:transparent!important;
-  background-image:url("logo-transparent-dark.webp");
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:contain;
-  box-shadow:none;
-  filter:drop-shadow(0 7px 16px rgba(0,0,0,.22)) drop-shadow(0 0 10px rgba(44,114,255,.08));
-  transition:transform .32s ease,filter .32s ease;
-}
-.header .brand-image-link:hover .brand-logo-new{
-  transform:translateY(-2px) scale(1.018);
-  filter:drop-shadow(0 10px 22px rgba(0,0,0,.28)) drop-shadow(0 0 16px rgba(51,123,255,.16));
-}
-.footer .brand-logo-new{
-  width:270px;
-  height:90px;
-  margin-bottom:8px;
-}
-html[data-theme="light"] .brand-logo-new{
-  background-image:url("logo-transparent-light.webp");
-  filter:drop-shadow(0 5px 12px rgba(15,22,36,.14));
-}
-@media(max-width:1040px){.brand-logo-new{width:212px;height:60px}}
-@media(max-width:760px){
-  .brand-logo-new{width:175px;height:52px}
-  .footer .brand-logo-new{width:220px;height:74px}
-}
-@media(max-width:430px){
-  .brand-logo-new{width:150px;height:46px}
-  .footer .brand-logo-new{width:205px;height:68px}
-}
+/* ===== Transparent Divine Future Tech logo ===== */
+.brand-image-link{display:inline-flex!important;align-items:center;flex:0 0 auto;background:transparent!important;box-shadow:none!important}
+.brand-logo-svg{display:block;width:246px;height:auto;overflow:visible;filter:drop-shadow(0 7px 16px rgba(0,0,0,.20));transition:transform .32s ease,filter .32s ease}
+.header .brand-image-link:hover .brand-logo-svg{transform:translateY(-2px) scale(1.018);filter:drop-shadow(0 10px 22px rgba(0,0,0,.26)) drop-shadow(0 0 14px rgba(38,117,255,.14))}
+.footer .brand-logo-svg{width:270px;margin-bottom:8px}
+html[data-theme="light"] .brand-logo-svg .brand-future-text{fill:#1c2433}
+html[data-theme="dark"] .brand-logo-svg .brand-future-text{fill:#d6deec}
+@media(max-width:1040px){.brand-logo-svg{width:212px}}
+@media(max-width:760px){.brand-logo-svg{width:175px}.footer .brand-logo-svg{width:220px}}
+@media(max-width:430px){.brand-logo-svg{width:150px}.footer .brand-logo-svg{width:205px}}
