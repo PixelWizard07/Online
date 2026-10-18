@@ -219,4 +219,27 @@
     });
   }
 
+
+  // Extra service-page motion: image parallax inside editorial service rows.
+  if (finePointer) {
+    document.querySelectorAll(".service-editorial-row").forEach(row => {
+      const image = row.querySelector(".service-editorial-media img");
+      if (!image) return;
+      row.addEventListener("pointermove", e => {
+        const r = row.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        row.style.setProperty("--hx", (px * 100).toFixed(1) + "%");
+        row.style.setProperty("--hy", (py * 100).toFixed(1) + "%");
+        const x = px - .5;
+        const y = py - .5;
+        image.style.transform =
+          "scale(1.075) translate3d(" + (x * -12) + "px," + (y * -9) + "px,16px)";
+      });
+      row.addEventListener("pointerleave", () => {
+        image.style.transform = "";
+      });
+    });
+  }
+
 })();
