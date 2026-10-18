@@ -253,4 +253,103 @@
     });
   }
 
+
+  // Cohesive site motion orchestration
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Ambient lighting layer
+  if (!document.querySelector(".site-ambient")) {
+    const ambient = document.createElement("div");
+    ambient.className = "site-ambient";
+    ambient.innerHTML = '<span class="ambient-a"></span><span class="ambient-b"></span><span class="ambient-c"></span>';
+    document.body.prepend(ambient);
+  }
+
+  // Entry / exit page transition
+  if (!reduceMotion && !document.querySelector(".site-transition")) {
+    const transition = document.createElement("div");
+    transition.className = "site-transition entry";
+    document.body.appendChild(transition);
+    setTimeout(() => transition.classList.remove("entry"), 900);
+
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("javascript:")) return;
+      if (/^https?:\/\//i.test(href) && !href.includes(location.host)) return;
+      link.addEventListener("click", e => {
+        if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || link.target === "_blank") return;
+        e.preventDefault();
+        transition.classList.add("leaving");
+        setTimeout(() => { location.href = href; }, 520);
+      });
+    });
+  }
+
+  // Main entrance timing
+  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add("site-ready")));
+
+  // Header scroll state
+  const header = document.querySelector(".header");
+  const updateHeader = () => header?.classList.toggle("scrolled", scrollY > 18);
+  addEventListener("scroll", updateHeader, { passive:true });
+  updateHeader();
+
+  // Add image-mask reveals to major visual containers.
+  const imageContainers = document.querySelectorAll(
+    ".hero-photo,.page-photo,.editorial-image,.work-media,.bento-media,.service-editorial-media,.service-hero-photo"
+  );
+  imageContainers.forEach(el => el.classList.add("image-reveal"));
+
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const imageObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("image-visible");
+          imageObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.12, rootMargin:"0px 0px -4% 0px" });
+    imageContainers.forEach(el => imageObserver.observe(el));
+  } else {
+    imageContainers.forEach(el => el.classList.add("image-visible"));
+  }
+
+  // Stagger children inside important groups.
+  const staggerGroups = document.querySelectorAll(
+    ".bento,.work-grid,.process,.faq,.service-editorial-list,.service-scope-grid,.deliverables-grid,.service-nav-grid,.feature-list,.trust-grid,.methods"
+  );
+  const staggerItems = [];
+  staggerGroups.forEach(group => {
+    [...group.children].forEach((child,index) => {
+      child.setAttribute("data-stagger-item","");
+      child.style.setProperty("--stagger", Math.min(index * 75, 450) + "ms");
+      staggerItems.push(child);
+    });
+  });
+
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const staggerObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("stagger-visible");
+          staggerObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.09, rootMargin:"0px 0px -4% 0px" });
+    staggerItems.forEach(el => staggerObserver.observe(el));
+  } else {
+    staggerItems.forEach(el => el.classList.add("stagger-visible"));
+  }
+
+  // Ambient follows pointer subtly on large screens.
+  if (finePointer && !reduceMotion) {
+    const ambient = document.querySelector(".site-ambient");
+    addEventListener("pointermove", e => {
+      if (!ambient) return;
+      const x = (e.clientX / innerWidth - .5) * 12;
+      const y = (e.clientY / innerHeight - .5) * 10;
+      ambient.style.transform = "translate3d(" + x + "px," + y + "px,0)";
+    }, { passive:true });
+  }
+
 })();
