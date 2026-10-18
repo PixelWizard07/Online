@@ -236,14 +236,14 @@
       row.style.setProperty("--scroll-progress", progress.toFixed(3));
 
       // Lightweight depth/parallax based on distance from viewport center.
-      if (finePointer && !reduceMotion && r.bottom > 0 && r.top < vh) {
+      if (finePointer && !reduceMotionEarly && r.bottom > 0 && r.top < vh) {
         const offset = (center - vh / 2) / vh;
         row.style.setProperty("--service-scroll-y", (offset * -10).toFixed(2) + "px");
       }
     });
   }, { passive:true });
 
-  if ("IntersectionObserver" in window && !reduceMotion) {
+  if ("IntersectionObserver" in window && !reduceMotionEarly) {
     const serviceObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         const row = entry.target;
@@ -311,7 +311,7 @@
   }
 
   // Entry / exit page transition
-  if (!reduceMotion && !document.querySelector(".site-transition")) {
+  if (!reduceMotionEarly && !document.querySelector(".site-transition")) {
     const transition = document.createElement("div");
     transition.className = "site-transition entry";
     document.body.appendChild(transition);
@@ -345,7 +345,7 @@
   );
   imageContainers.forEach(el => el.classList.add("image-reveal"));
 
-  if ("IntersectionObserver" in window && !reduceMotion) {
+  if ("IntersectionObserver" in window && !reduceMotionEarly) {
     const imageObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -372,7 +372,7 @@
     });
   });
 
-  if ("IntersectionObserver" in window && !reduceMotion) {
+  if ("IntersectionObserver" in window && !reduceMotionEarly) {
     const staggerObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -387,7 +387,7 @@
   }
 
   // Ambient follows pointer subtly on large screens.
-  if (finePointer && !reduceMotion) {
+  if (finePointer && !reduceMotionEarly) {
     const ambient = document.querySelector(".site-ambient");
     addEventListener("pointermove", e => {
       if (!ambient) return;
@@ -400,7 +400,7 @@
 
   // Premium homepage hero depth
   const premiumHero = document.querySelector("[data-hero-premium]");
-  if (premiumHero && finePointer && !reduceMotion) {
+  if (premiumHero && finePointer && !reduceMotionEarly) {
     const browser = premiumHero.querySelector(".hero-browser");
     const floats = premiumHero.querySelectorAll(".hero-float-card");
     premiumHero.addEventListener("pointermove", e => {
