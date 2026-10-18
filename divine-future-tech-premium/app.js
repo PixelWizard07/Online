@@ -352,4 +352,27 @@
     }, { passive:true });
   }
 
+
+  // Premium homepage hero depth
+  const premiumHero = document.querySelector("[data-hero-premium]");
+  if (premiumHero && finePointer && !reduceMotion) {
+    const browser = premiumHero.querySelector(".hero-browser");
+    const floats = premiumHero.querySelectorAll(".hero-float-card");
+    premiumHero.addEventListener("pointermove", e => {
+      const r = premiumHero.getBoundingClientRect();
+      const x = (e.clientX-r.left)/r.width-.5;
+      const y = (e.clientY-r.top)/r.height-.5;
+      if (browser) browser.style.transform =
+        "rotateY(" + (-6 + x*8) + "deg) rotateX(" + (2-y*6) + "deg) translate3d(" + (x*11) + "px," + (y*9) + "px,18px)";
+      floats.forEach((el,i) => {
+        const depth = 9 + i*4;
+        el.style.translate = (x*depth) + "px " + (y*depth*.7) + "px";
+      });
+    });
+    premiumHero.addEventListener("pointerleave", () => {
+      if (browser) browser.style.transform = "";
+      floats.forEach(el => el.style.translate = "");
+    });
+  }
+
 })();
