@@ -193,4 +193,30 @@
     });
   }
 
+
+  // Service cards open their dedicated pages.
+  document.querySelectorAll(".service-link-card[data-service-url]").forEach(card => {
+    const open = () => location.href = card.dataset.serviceUrl;
+    card.addEventListener("click", e => {
+      if (e.target.closest("a,button")) return;
+      open();
+    });
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open();
+      }
+    });
+  });
+
+  if (finePointer) {
+    document.querySelectorAll(".deliverable-card,.service-nav-card").forEach(card => {
+      card.addEventListener("pointermove", e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--hx", (((e.clientX-r.left)/r.width)*100).toFixed(1) + "%");
+        card.style.setProperty("--hy", (((e.clientY-r.top)/r.height)*100).toFixed(1) + "%");
+      });
+    });
+  }
+
 })();
