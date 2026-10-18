@@ -131,4 +131,66 @@
       location.href = "mailto:hello@divinefuturetech.com?subject=" + subject + "&body=" + body;
     });
   }
+
+  // Site-wide 3D interaction system
+  if (finePointer) {
+    const depthSelectors = [
+      ".bento-card",".work-card",".step",".trust-card",".feature",".panel",
+      ".faq details",".method",".cta-box",".editorial-image",".page-photo"
+    ];
+    const depthElements = [...document.querySelectorAll(depthSelectors.join(","))];
+
+    depthElements.forEach(el => {
+      el.dataset.depthCard = "1";
+      el.addEventListener("pointermove", e => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const x = px - 0.5;
+        const y = py - 0.5;
+
+        el.style.setProperty("--hx", (px * 100).toFixed(1) + "%");
+        el.style.setProperty("--hy", (py * 100).toFixed(1) + "%");
+
+        // Cards with data-tilt already have their own stronger transform.
+        if (!el.hasAttribute("data-tilt")) {
+          const strength = el.matches(".editorial-image,.page-photo,.cta-box") ? 4.2 : 5.5;
+          el.style.transform =
+            "perspective(1050px) rotateX(" + (-y * strength) + "deg) rotateY(" + (x * strength) +
+            "deg) translateY(-7px) translateZ(14px)";
+        }
+      });
+      el.addEventListener("pointerleave", () => {
+        if (!el.hasAttribute("data-tilt")) el.style.transform = "";
+      });
+    });
+
+    // Magnetic buttons
+    document.querySelectorAll(".btn").forEach(btn => {
+      btn.addEventListener("pointermove", e => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        btn.style.transform =
+          "perspective(650px) translate3d(" + (x * 0.10) + "px," + (y * 0.13) +
+          "px,22px) rotateX(" + (-y * 0.05) + "deg) rotateY(" + (x * 0.05) + "deg) scale(1.025)";
+      });
+      btn.addEventListener("pointerleave", () => btn.style.transform = "");
+    });
+
+    // Layered image movement within cards
+    document.querySelectorAll(".bento-card,.work-card").forEach(card => {
+      const img = card.querySelector("img");
+      if (!img) return;
+      card.addEventListener("pointermove", e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        img.style.transform =
+          "scale(1.075) translate3d(" + (x * -10) + "px," + (y * -8) + "px,14px)";
+      });
+      card.addEventListener("pointerleave", () => img.style.transform = "");
+    });
+  }
+
 })();
