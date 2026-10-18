@@ -2616,19 +2616,26 @@ html.motion body:not(.site-ready) .service-detail-hero .actions{
   align-items:center;
   flex:0 0 auto;
   color:inherit;
+  background:transparent!important;
+  box-shadow:none!important;
 }
 .brand-logo-new{
   display:block;
   width:246px;
   height:68px;
-  border-radius:14px;
-  background:#000 url("logo-uploaded.webp") center/contain no-repeat;
-  box-shadow:0 12px 30px rgba(0,0,0,.16);
-  transition:transform .32s ease,box-shadow .32s ease,filter .32s ease;
+  border-radius:0;
+  background-color:transparent!important;
+  background-image:url("logo-transparent-dark.webp");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  box-shadow:none;
+  filter:drop-shadow(0 7px 16px rgba(0,0,0,.22)) drop-shadow(0 0 10px rgba(44,114,255,.08));
+  transition:transform .32s ease,filter .32s ease;
 }
 .header .brand-image-link:hover .brand-logo-new{
-  transform:translateY(-2px) scale(1.015);
-  box-shadow:0 16px 38px rgba(0,0,0,.22),0 0 24px rgba(51,123,255,.10);
+  transform:translateY(-2px) scale(1.018);
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.28)) drop-shadow(0 0 16px rgba(51,123,255,.16));
 }
 .footer .brand-logo-new{
   width:270px;
@@ -2636,11 +2643,12 @@ html.motion body:not(.site-ready) .service-detail-hero .actions{
   margin-bottom:8px;
 }
 html[data-theme="light"] .brand-logo-new{
-  box-shadow:0 12px 32px rgba(15,22,36,.16);
+  background-image:url("logo-transparent-light.webp");
+  filter:drop-shadow(0 5px 12px rgba(15,22,36,.14));
 }
 @media(max-width:1040px){.brand-logo-new{width:212px;height:60px}}
 @media(max-width:760px){
-  .brand-logo-new{width:175px;height:52px;border-radius:11px}
+  .brand-logo-new{width:175px;height:52px}
   .footer .brand-logo-new{width:220px;height:74px}
 }
 @media(max-width:430px){
