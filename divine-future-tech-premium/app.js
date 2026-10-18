@@ -194,17 +194,28 @@
   }
 
 
-  // Service cards open their dedicated pages.
+  // Service overview cards reveal details first; the explicit Explore link opens the service page.
   document.querySelectorAll(".service-link-card[data-service-url]").forEach(card => {
-    const open = () => location.href = card.dataset.serviceUrl;
+    const disclosure = card.querySelector(".service-disclosure");
+    const setOpen = open => {
+      card.classList.toggle("open", open);
+      if (disclosure) {
+        disclosure.setAttribute("aria-expanded", String(open));
+        const label = disclosure.querySelector("span");
+        if (label) label.textContent = open ? "Show" : "View details";
+      }
+    };
+    const toggle = () => setOpen(!card.classList.contains("open"));
+
     card.addEventListener("click", e => {
-      if (e.target.closest("a,button")) return;
-      open();
+      if (e.target.closest("a")) return;
+      toggle();
     });
     card.addEventListener("keydown", e => {
       if (e.key === "Enter" || e.key === " ") {
+        if (e.target.closest("a,button")) return;
         e.preventDefault();
-        open();
+        toggle();
       }
     });
   });
