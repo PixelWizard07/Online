@@ -194,31 +194,76 @@
   }
 
 
-  // Service overview cards reveal details first; the explicit Explore link opens the service page.
+  // Entire service row toggles its deep details; technologies remain visible.
   document.querySelectorAll(".service-link-card[data-service-url]").forEach(card => {
-    const disclosure = card.querySelector(".service-disclosure");
+    card.setAttribute("aria-expanded", card.classList.contains("open") ? "true" : "false");
+
     const setOpen = open => {
       card.classList.toggle("open", open);
-      if (disclosure) {
-        disclosure.setAttribute("aria-expanded", String(open));
-        const label = disclosure.querySelector("span");
-        if (label) label.textContent = open ? "Show" : "View details";
-      }
+      card.setAttribute("aria-expanded", String(open));
     };
     const toggle = () => setOpen(!card.classList.contains("open"));
 
     card.addEventListener("click", e => {
+      // Explicit Explore links still navigate to the dedicated service page.
       if (e.target.closest("a")) return;
       toggle();
     });
     card.addEventListener("keydown", e => {
       if (e.key === "Enter" || e.key === " ") {
-        if (e.target.closest("a,button")) return;
+        if (e.target.closest("a")) return;
         e.preventDefault();
         toggle();
       }
     });
   });
+
+  // Re-play service animations when cards enter from either scroll direction.
+  const serviceRows = [...document.querySelectorAll(".service-editorial-row")];
+  let previousScrollY = scrollY;
+  let scrollDirection = "down";
+
+  addEventListener("scroll", () => {
+    const current = scrollY;
+    scrollDirection = current >= previousScrollY ? "down" : "up";
+    previousScrollY = current;
+
+    const vh = innerHeight || document.documentElement.clientHeight;
+    serviceRows.forEach(row => {
+      const r = row.getBoundingClientRect();
+      const center = r.top + r.height / 2;
+      const progress = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+      row.style.setProperty("--scroll-progress", progress.toFixed(3));
+
+      // Lightweight depth/parallax based on distance from viewport center.
+      if (finePointer && !reduceMotion && r.bottom > 0 && r.top < vh) {
+        const offset = (center - vh / 2) / vh;
+        row.style.setProperty("--service-scroll-y", (offset * -10).toFixed(2) + "px");
+      }
+    });
+  }, { passive:true });
+
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const serviceObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const row = entry.target;
+        if (entry.isIntersecting) {
+          row.classList.remove("service-scroll-out");
+          // Re-trigger animation every time it re-enters, including reverse scroll.
+          row.classList.remove("service-scroll-in");
+          void row.offsetWidth;
+          row.classList.add("service-scroll-in");
+          row.dataset.lastScrollDirection = scrollDirection;
+        } else {
+          row.classList.remove("service-scroll-in");
+          row.classList.add("service-scroll-out");
+        }
+      });
+    }, { threshold:.16, rootMargin:"-4% 0px -8% 0px" });
+    serviceRows.forEach(row => serviceObserver.observe(row));
+  } else {
+    serviceRows.forEach(row => row.classList.add("service-scroll-in"));
+  }
 
   if (finePointer) {
     document.querySelectorAll(".deliverable-card,.service-nav-card").forEach(card => {
