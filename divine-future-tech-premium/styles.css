@@ -1234,3 +1234,6 @@ html.motion .service-detail-page .faq details:not(.visible){
     animation:none!important;
   }
 }
+
+/* Hide editorial image numbers */
+.service-editorial-number{display:none!important}
