@@ -1237,3 +1237,84 @@ html.motion .service-detail-page .faq details:not(.visible){
 
 /* Hide editorial image numbers */
 .service-editorial-number{display:none!important}
+
+
+/* ===== Work-specific service icon system ===== */
+.service-image-icon{
+  position:absolute;
+  z-index:4;
+  top:22px;
+  left:22px;
+  width:54px;
+  height:54px;
+  display:grid;
+  place-items:center;
+  border-radius:17px;
+  color:#eaf7ff;
+  background:rgba(7,14,27,.78);
+  border:1px solid rgba(198,227,255,.22);
+  backdrop-filter:blur(14px) saturate(125%);
+  box-shadow:0 14px 38px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06);
+  transition:transform .32s ease,border-color .32s ease,box-shadow .32s ease,background .32s ease;
+}
+.service-image-icon svg{
+  width:26px;
+  height:26px;
+}
+.service-editorial-row:hover .service-image-icon{
+  transform:translateY(-5px) translateZ(28px) rotate(-5deg) scale(1.08);
+  border-color:rgba(205,237,255,.38);
+  box-shadow:0 20px 50px rgba(0,0,0,.34),0 0 28px rgba(102,152,255,.13);
+}
+.service-icon-web{color:#8fdcff;background:linear-gradient(145deg,rgba(14,49,78,.88),rgba(7,18,33,.82))}
+.service-icon-app{color:#78e6ff;background:linear-gradient(145deg,rgba(10,54,72,.88),rgba(8,22,35,.82))}
+.service-icon-ai{color:#bfa9ff;background:linear-gradient(145deg,rgba(54,39,100,.9),rgba(18,15,41,.84))}
+.service-icon-social{color:#ffacd8;background:linear-gradient(145deg,rgba(91,31,69,.9),rgba(38,13,31,.84))}
+.service-icon-ux{color:#ffd0a8;background:linear-gradient(145deg,rgba(93,53,25,.9),rgba(40,23,14,.84))}
+.service-icon-maintain{color:#93f0cb;background:linear-gradient(145deg,rgba(22,76,61,.9),rgba(8,35,29,.84))}
+.service-icon-consult{color:#ffe08d;background:linear-gradient(145deg,rgba(84,65,20,.9),rgba(37,29,10,.84))}
+
+.service-hero-icon{
+  flex:0 0 auto;
+  width:48px!important;
+  height:48px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:14px!important;
+  color:#eef8ff;
+  backdrop-filter:blur(10px);
+  transition:transform .32s ease,box-shadow .32s ease;
+}
+.service-hero-icon svg{width:25px;height:25px}
+.service-hero-overlay:hover .service-hero-icon{
+  transform:rotate(-6deg) scale(1.08) translateZ(20px);
+  box-shadow:0 15px 34px rgba(0,0,0,.28);
+}
+.service-hero-icon.service-icon-web{background:linear-gradient(145deg,rgba(14,49,78,.95),rgba(7,18,33,.9))}
+.service-hero-icon.service-icon-app{background:linear-gradient(145deg,rgba(10,54,72,.95),rgba(8,22,35,.9))}
+.service-hero-icon.service-icon-ai{background:linear-gradient(145deg,rgba(54,39,100,.95),rgba(18,15,41,.9))}
+.service-hero-icon.service-icon-social{background:linear-gradient(145deg,rgba(91,31,69,.95),rgba(38,13,31,.9))}
+.service-hero-icon.service-icon-ux{background:linear-gradient(145deg,rgba(93,53,25,.95),rgba(40,23,14,.9))}
+.service-hero-icon.service-icon-maintain{background:linear-gradient(145deg,rgba(22,76,61,.95),rgba(8,35,29,.9))}
+.service-hero-icon.service-icon-consult{background:linear-gradient(145deg,rgba(84,65,20,.95),rgba(37,29,10,.9))}
+
+/* Keep the photo visible while making service identity clear. */
+.service-editorial-media img,
+.service-hero-photo img,
+.editorial-image img{
+  object-position:center;
+}
+@media(max-width:720px){
+  .service-image-icon{
+    top:16px;
+    left:16px;
+    width:48px;
+    height:48px;
+    border-radius:15px;
+  }
+  .service-image-icon svg{width:23px;height:23px}
+}
+@media(max-width:430px){
+  .service-image-icon{width:44px;height:44px}
+  .service-image-icon svg{width:21px;height:21px}
+}
