@@ -2560,3 +2560,52 @@ html.motion body:not(.site-ready) .service-detail-hero .actions{
   white-space:nowrap;
   line-height:1;
 }
+
+
+/* ===== Correct service technology stacks ===== */
+.service-tech-stack{
+  display:grid!important;
+  gap:9px!important;
+  margin-top:15px!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+.service-tech-list{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:7px!important;
+}
+.service-tech-chip{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+.service-tech-chip i{
+  min-width:22px;
+  height:22px;
+  padding:0 4px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  font-size:.49rem;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-.02em;
+}
+.service-collapsible{
+  cursor:pointer;
+}
+.service-collapsible:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:4px;
+}
+.service-collapsible:not(.open) .service-tech-stack,
+.service-collapsible:not(.open) .service-tech-list,
+.service-collapsible:not(.open) .service-tech-chip{
+  display:flex!important;
+}
+.service-collapsible:not(.open) .service-tech-stack{
+  display:grid!important;
+}
