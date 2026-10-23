@@ -3093,3 +3093,83 @@ body.nav-open{overflow:hidden}
 @media(max-width:360px){
   .brand-logo-exact{width:122px}
 }
+
+
+/* ===== DFT refined logo treatment ===== */
+.brand-image-link{
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:flex-start;
+  flex:0 0 auto;
+  min-width:0!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.brand-logo-shell.brand-logo-stack{
+  position:relative;
+  display:inline-block;
+  width:220px;
+  aspect-ratio:2048 / 682;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible;
+}
+.brand-logo-stack .brand-logo-exact{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain;
+  object-position:left center;
+  background:transparent!important;
+  transform:none!important;
+}
+.brand-logo-stack .brand-logo-base{
+  filter:none!important;
+}
+.brand-logo-stack .brand-logo-lighttext{
+  pointer-events:none;
+  filter:brightness(0) invert(1)!important;
+  clip-path:inset(0 0 0 51%);
+  opacity:1;
+}
+html[data-theme="light"] .brand-logo-stack .brand-logo-lighttext{
+  opacity:0;
+}
+.header .brand-image-link{
+  padding:4px 0!important;
+}
+.header .brand-image-link:hover .brand-logo-stack{
+  transform:translateY(-1px);
+}
+.brand-logo-stack{
+  transition:transform .25s ease, opacity .25s ease;
+}
+.footer .brand-logo-shell.brand-logo-stack{
+  width:255px;
+  margin-bottom:14px;
+}
+@media(max-width:1040px){
+  .brand-logo-shell.brand-logo-stack{width:190px}
+  .footer .brand-logo-shell.brand-logo-stack{width:225px}
+}
+@media(max-width:760px){
+  .brand-logo-shell.brand-logo-stack{width:158px}
+  .footer .brand-logo-shell.brand-logo-stack{width:200px}
+}
+@media(max-width:430px){
+  .brand-logo-shell.brand-logo-stack{width:142px}
+  .footer .brand-logo-shell.brand-logo-stack{width:182px}
+}
+@media(max-width:360px){
+  .brand-logo-shell.brand-logo-stack{width:126px}
+}
+@media(prefers-reduced-motion:reduce){
+  .brand-logo-stack{transition:none!important}
+}
