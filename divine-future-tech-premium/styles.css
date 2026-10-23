@@ -2971,3 +2971,64 @@ body.nav-open{overflow:hidden}
   .hero-float-card{display:none!important}
   .page-hero,.service-detail-hero{padding:38px 0!important}
 }
+
+/* ===== Exact uploaded logo: display only, artwork untouched ===== */
+.brand-image-link{
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:flex-start;
+  flex:0 0 auto;
+  min-width:0!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:visible;
+}
+.brand-logo-shell{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:3px 7px;
+  border-radius:14px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(255,255,255,.42);
+  box-shadow:0 8px 24px rgba(0,0,0,.14);
+  overflow:hidden;
+}
+.brand-logo-exact{
+  display:block;
+  width:218px;
+  height:auto;
+  aspect-ratio:2048 / 682;
+  object-fit:contain;
+  object-position:center;
+  background:transparent!important;
+  filter:none!important;
+  transform:none!important;
+}
+.header .brand-image-link:hover .brand-logo-exact{
+  transform:none!important;
+  filter:none!important;
+}
+.header .brand-image-link:hover .brand-logo-shell{
+  box-shadow:0 10px 28px rgba(0,0,0,.17);
+}
+.footer .brand-logo-shell{padding:5px 8px}
+.footer .brand-logo-exact{width:270px}
+@media(max-width:1040px){
+  .brand-logo-exact{width:188px}
+  .footer .brand-logo-exact{width:238px}
+}
+@media(max-width:760px){
+  .brand-logo-shell{padding:2px 5px;border-radius:11px}
+  .brand-logo-exact{width:154px}
+  .footer .brand-logo-exact{width:210px}
+}
+@media(max-width:430px){
+  .brand-logo-exact{width:136px}
+  .footer .brand-logo-exact{width:188px}
+}
+@media(max-width:360px){
+  .brand-logo-exact{width:122px}
+}
