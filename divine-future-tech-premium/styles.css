@@ -2972,7 +2972,9 @@ body.nav-open{overflow:hidden}
   .page-hero,.service-detail-hero{padding:38px 0!important}
 }
 
-/* ===== Exact uploaded logo: display only, artwork untouched ===== */
+
+
+/* ===== Polished Divine Future Tech logo treatment ===== */
 .brand-image-link{
   display:inline-flex!important;
   align-items:center;
@@ -2986,190 +2988,64 @@ body.nav-open{overflow:hidden}
   overflow:visible;
 }
 .brand-logo-shell{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:3px 7px;
-  border-radius:14px;
-  background:rgba(255,255,255,.96);
-  border:1px solid rgba(255,255,255,.42);
-  box-shadow:0 8px 24px rgba(0,0,0,.14);
-  overflow:hidden;
-}
-.brand-logo-exact{
-  display:block;
-  width:218px;
-  height:auto;
-  aspect-ratio:2048 / 682;
-  object-fit:contain;
-  object-position:center;
-  background:transparent!important;
-  filter:none!important;
-  transform:none!important;
-}
-.header .brand-image-link:hover .brand-logo-exact{
-  transform:none!important;
-  filter:none!important;
-}
-.header .brand-image-link:hover .brand-logo-shell{
-  box-shadow:0 10px 28px rgba(0,0,0,.17);
-}
-.footer .brand-logo-shell{padding:5px 8px}
-.footer .brand-logo-exact{width:270px}
-@media(max-width:1040px){
-  .brand-logo-exact{width:188px}
-  .footer .brand-logo-exact{width:238px}
-}
-@media(max-width:760px){
-  .brand-logo-shell{padding:2px 5px;border-radius:11px}
-  .brand-logo-exact{width:154px}
-  .footer .brand-logo-exact{width:210px}
-}
-@media(max-width:430px){
-  .brand-logo-exact{width:136px}
-  .footer .brand-logo-exact{width:188px}
-}
-@media(max-width:360px){
-  .brand-logo-exact{width:122px}
-}
-
-
-/* ===== Uploaded logo placement (artwork unchanged) ===== */
-.brand-image-link{
-  display:inline-flex!important;
-  align-items:center;
-  justify-content:flex-start;
-  flex:0 0 auto;
-  min-width:0!important;
-  padding:0!important;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-  overflow:visible;
-}
-.brand-logo-shell{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:3px 7px;
-  border-radius:14px;
-  background:rgba(255,255,255,.96);
-  border:1px solid rgba(255,255,255,.42);
-  box-shadow:0 8px 24px rgba(0,0,0,.14);
-  overflow:hidden;
-}
-.brand-logo-exact{
-  display:block;
-  width:218px;
-  height:auto;
-  object-fit:contain;
-  object-position:center;
-  background:transparent!important;
-  filter:none!important;
-  transform:none!important;
-}
-.header .brand-image-link:hover .brand-logo-exact{
-  transform:none!important;
-  filter:none!important;
-}
-.header .brand-image-link:hover .brand-logo-shell{
-  box-shadow:0 10px 28px rgba(0,0,0,.17);
-}
-.footer .brand-logo-shell{padding:5px 8px}
-.footer .brand-logo-exact{width:270px}
-@media(max-width:1040px){
-  .brand-logo-exact{width:188px}
-  .footer .brand-logo-exact{width:238px}
-}
-@media(max-width:760px){
-  .brand-logo-shell{padding:2px 5px;border-radius:11px}
-  .brand-logo-exact{width:154px}
-  .footer .brand-logo-exact{width:210px}
-}
-@media(max-width:430px){
-  .brand-logo-exact{width:136px}
-  .footer .brand-logo-exact{width:188px}
-}
-@media(max-width:360px){
-  .brand-logo-exact{width:122px}
-}
-
-
-/* ===== DFT refined logo treatment ===== */
-.brand-image-link{
-  display:inline-flex!important;
-  align-items:center;
-  justify-content:flex-start;
-  flex:0 0 auto;
-  min-width:0!important;
-  padding:0!important;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-}
-.brand-logo-shell.brand-logo-stack{
   position:relative;
-  display:inline-block;
-  width:220px;
+  display:inline-grid;
+  place-items:center;
+  width:210px;
   aspect-ratio:2048 / 682;
-  padding:0!important;
-  border:0!important;
-  border-radius:0!important;
+  padding:0;
+  border:0;
+  border-radius:0;
   background:transparent!important;
   box-shadow:none!important;
   overflow:visible;
 }
-.brand-logo-stack .brand-logo-exact{
-  position:absolute;
-  inset:0;
+.brand-logo-exact{
+  grid-area:1/1;
   display:block;
-  width:100%!important;
-  height:100%!important;
+  width:100%;
+  height:100%;
   object-fit:contain;
-  object-position:left center;
+  object-position:center;
   background:transparent!important;
-  transform:none!important;
-}
-.brand-logo-stack .brand-logo-base{
   filter:none!important;
-}
-.brand-logo-stack .brand-logo-lighttext{
+  transform:none!important;
   pointer-events:none;
-  filter:brightness(0) invert(1)!important;
-  clip-path:inset(0 0 0 51%);
-  opacity:1;
 }
-html[data-theme="light"] .brand-logo-stack .brand-logo-lighttext{
+.brand-logo-lighttext{
   opacity:0;
+  clip-path:inset(0 0 0 51%);
+  filter:brightness(0) invert(1)!important;
 }
+html[data-theme="dark"] .brand-logo-lighttext{opacity:1}
+html[data-theme="light"] .brand-logo-lighttext{opacity:0}
 .header .brand-image-link{
   padding:4px 0!important;
+  transition:opacity .25s ease,transform .25s ease;
 }
-.header .brand-image-link:hover .brand-logo-stack{
+.header .brand-image-link:hover{
+  opacity:.96;
   transform:translateY(-1px);
 }
-.brand-logo-stack{
-  transition:transform .25s ease, opacity .25s ease;
-}
-.footer .brand-logo-shell.brand-logo-stack{
-  width:255px;
-  margin-bottom:14px;
-}
+.header .brand-logo-shell{width:205px}
+.footer .brand-logo-shell{width:250px}
+
 @media(max-width:1040px){
-  .brand-logo-shell.brand-logo-stack{width:190px}
-  .footer .brand-logo-shell.brand-logo-stack{width:225px}
+  .header .brand-logo-shell{width:178px}
+  .footer .brand-logo-shell{width:225px}
 }
 @media(max-width:760px){
-  .brand-logo-shell.brand-logo-stack{width:158px}
-  .footer .brand-logo-shell.brand-logo-stack{width:200px}
+  .header .brand-logo-shell{width:154px}
+  .footer .brand-logo-shell{width:205px}
 }
 @media(max-width:430px){
-  .brand-logo-shell.brand-logo-stack{width:142px}
-  .footer .brand-logo-shell.brand-logo-stack{width:182px}
+  .header .brand-logo-shell{width:138px}
+  .footer .brand-logo-shell{width:185px}
 }
 @media(max-width:360px){
-  .brand-logo-shell.brand-logo-stack{width:126px}
+  .header .brand-logo-shell{width:124px}
+  .footer .brand-logo-shell{width:170px}
 }
 @media(prefers-reduced-motion:reduce){
-  .brand-logo-stack{transition:none!important}
+  .header .brand-image-link{transition:none!important}
 }
